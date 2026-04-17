@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2E Tecnologia Rodoviária | Engenharia de Tráfego</title>
+    <meta name="description" content="L2E Tecnologia Rodoviária - 11 anos de excelência em engenharia de transporte, estudos de tráfego e análise de dados.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <!-- background canvas for neural network effect -->
+    <canvas id="neural-canvas"></canvas>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay"></div>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="assets/logo_contrast.png" alt="L2E Tecnologia" class="nav-logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato" class="btn btn-outline">Contato</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-video-container">
+                <div class="hero-overlay"></div>
+                <video autoplay muted loop playsinline preload="auto" class="hero-video" id="main-highway-video">
+                    <!-- Local Source (User Provided) -->
+                    <source src="assets/hero-video.mp4" type="video/mp4">
+                    <!-- High Reliability Fallbacks -->
+                    <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=2311494635667e6c38b2586612d385f096738947&profile_id=165" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+            </div>
+            
+            <div class="container hero-content">
+                <div class="hero-text" data-reveal="left">
+                    <span class="badge">Engenharia e Dados</span>
+                    <h1>Inteligência que move o <span class="gradient-text">tráfego</span></h1>
+                    <p class="subtitle">Soluções fundamentadas em dados para planejamento viário com suporte tecnológico avançado e precisão técnica.</p>
+                    <div class="hero-btns">
+                        <a href="#contato" class="btn btn-primary btn-large">Solicitar Orçamento <i data-lucide="arrow-right"></i></a>
+                        <a href="#sobre" class="btn btn-secondary btn-large">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section (NEW - Após Hero) -->
+        <section class="about-section" id="sobre">
+            <div class="container split-layout">
+                <div class="about-visual" data-reveal="left">
+                    <div class="visual-wrapper glass-card premium-shadow">
+                        <img src="assets/project1.png" alt="Experiência Engenharia" class="about-img">
+                        <div class="experience-badge">
+                            <span class="exp-number">+11</span>
+                            <span class="exp-text">anos de<br>experiência</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" data-reveal="right">
+                    <span class="badge">Nossa História</span>
+                    <h2>Excelência Consolidada em <span class="gradient-text">Infraestrutura</span></h2>
+                    <p>A L2E nasceu da expertise de profissionais que acumularam mais de uma década de experiência em grandes empresas do setor rodoviário. Nossa transição para uma estrutura própria reflete o compromisso com a agilidade e a inovação tecnológica no processamento de dados viários.</p>
+                    <p>Com um histórico sólido de projetos entregues nas mais diversas cidades do Brasil, transformamos contagens e estudos de campo em inteligência estratégica para concessionárias e órgãos públicos.</p>
+                    
+                    <div class="about-stats-mini">
+                        <div class="mini-stat">
+                            <h4>Projetos Ativos</h4>
+                            <p>Em todo o território nacional</p>
+                        </div>
+                        <div class="mini-stat">
+                            <h4>Equipe Especialista</h4>
+                            <p>Engenharia de transportes dedicada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (Fixed Grid) -->
+        <section class="services" id="servicos">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom">
+                    <h2 class="title">Nossos <span class="gradient-text">Serviços</span></h2>
+                    <p>Precisão técnica e tecnologia de ponta para todas as etapas do seu projeto viário.</p>
+                </div>
+
+                <div class="services-grid-wrapper">
+                    <div class="service-card glass-card" data-reveal="bottom">
+                        <div class="icon-box"><i data-lucide="activity"></i></div>
+                        <h3>Estudo de Tráfego</h3>
+                        <p>Análise detalhada de capacidade, nível de serviço e comportamento viário.</p>
+                    </div>
+                    <div class="service-card glass-card" data-reveal="bottom" style="transition-delay: 0.1s;">
+                        <div class="icon-box"><i data-lucide="bar-chart-3"></i></div>
+                        <h3>Contagem Veicular</h3>
+                        <p>Coleta volumétrica com classificação avançada e rigor normativo.</p>
+                    </div>
+                    <div class="service-card glass-card" data-reveal="bottom" style="transition-delay: 0.2s;">
+                        <div class="icon-box"><i data-lucide="cpu"></i></div>
+                        <h3>Análise com IA</h3>
+                        <p>Processamento automatizado de dados com auditoria técnica de precisão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Section -->
+        <section class="tech-section" id="tecnologia">
+            <div class="container split-layout">
+                <div class="tech-content" data-reveal="left">
+                    <span class="badge">Ferramentas de Precisão</span>
+                    <h2>Rigor Técnico e <span class="gradient-text">Conformidade</span></h2>
+                    <p>Utilizamos tecnologias proprietárias para garantir que cada relatório esteja em total conformidade com as normas do DNIT e ARTs vigentes.</p>
+                    <ul class="tech-features">
+                        <li><i data-lucide="check" class="text-blue"></i> Padrão normativo DNIT</li>
+                        <li><i data-lucide="check" class="text-blue"></i> Auditoria de 99.8% de precisão</li>
+                        <li><i data-lucide="check" class="text-blue"></i> Entrega ágil de relatórios</li>
+                    </ul>
+                </div>
+                <div class="tech-visual" data-reveal="right">
+                    <div class="visual-container">
+                        <img src="assets/tech_visual.png" alt="Engenharia de Tráfego L2E" class="tech-main-img glass-card premium-shadow">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects" id="projetos">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom">
+                    <h2 class="title">Projetos em <span class="gradient-text">Destaque</span></h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card glass-card" data-reveal="bottom">
+                        <div class="project-img">
+                            <img src="assets/project1.png" alt="Fluxo Rodoviário">
+                        </div>
+                        <div class="project-info">
+                            <h4>Estudo de Fluxo BR-101</h4>
+                            <p>Análise para projetos de ampliação de capacidade viária.</p>
+                            <span class="project-location"><i data-lucide="map-pin" size="14"></i> Santa Catarina</span>
+                        </div>
+                    </div>
+                    <div class="project-card glass-card" data-reveal="bottom" style="transition-delay: 0.1s;">
+                        <div class="project-img">
+                            <img src="assets/project2.png" alt="Mobilidade Urbana">
+                        </div>
+                        <div class="project-info">
+                            <h4>Planejamento Urbano</h4>
+                            <p>Otimização de tráfego em interseções críticas.</p>
+                            <span class="project-location"><i data-lucide="map-pin" size="14"></i> São Paulo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results / Impact -->
+        <section class="results">
+            <div class="container">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span class="counter" data-reveal="bottom" data-target="500000">+0</span>
+                        <p>Veículos Analisados</p>
+                    </div>
+                    <div class="stat-item" style="transition-delay: 0.1s;">
+                        <span class="counter" data-reveal="bottom" data-target="150" style="transition-delay: 0.1s;">+0</span>
+                        <p>Projetos Realizados</p>
+                    </div>
+                    <div class="stat-item" style="transition-delay: 0.2s;">
+                        <span class="counter" data-reveal="bottom" data-target="99.8" style="transition-delay: 0.2s;">0%</span>
+                        <p>Precisão Técnica</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-section" id="contato">
+            <div class="container">
+                <div class="contact-wrapper glass-card premium-shadow" data-reveal="bottom">
+                    <div class="contact-info">
+                        <h2>Vamos elevar o <br><span class="gradient-text">seu projeto?</span></h2>
+                        <p>Solicite uma cotação técnica para seus estudos de tráfego.</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <i data-lucide="mail"></i>
+                                <span>contato.l2etec@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="phone"></i>
+                                <span>(48) 99932-4253</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Florianópolis, SC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="name">Nome</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" rows="3" placeholder="Como podemos ajudar?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-large">Enviar agora <i data-lucide="send"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (REDIESIGNED) -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col-brand">
+                    <img src="assets/logo_contrast.png" alt="L2E" class="footer-logo">
+                    <p>Qualidade técnica e precisão em engenharia de tráfego, com expertise de 11 anos de atuação nacional.</p>
+                </div>
+                <div class="footer-col-nav">
+                    <h4>Navegação</h4>
+                    <ul class="footer-links-clean">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-contact">
+                    <h4>Contato</h4>
+                    <ul class="footer-links-clean">
+                        <li>contato.l2etec@gmail.com</li>
+                        <li>(48) 99932-4253</li>
+                        <li>Florianópolis - SC</li>
+                    </ul>
+                </div>
+                <div class="footer-col-social">
+                    <h4>Social</h4>
+                    <div class="social-flex">
+                        <a href="#"><i data-lucide="linkedin"></i></a>
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 L2E Tecnologia Rodoviária. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
