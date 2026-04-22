@@ -483,9 +483,9 @@ footer {
 }
 
 .footer-top {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 0.8fr;
-    gap: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
     margin-bottom: 4rem;
 }
 
@@ -568,9 +568,15 @@ footer {
 }
 
 @media (max-width: 1024px) {
-    .split-layout, .footer-top, .contact-wrapper {
+    .split-layout, .contact-wrapper {
         grid-template-columns: 1fr;
         gap: 4rem;
+    }
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 3rem;
     }
     .services-grid-wrapper {
         grid-template-columns: repeat(2, 1fr);
@@ -690,15 +696,6 @@ footer {
     }
 
     /* Footer Mobile Alignment (Fully Centered as requested) */
-    .footer-top {
-        text-align: center;
-        gap: 3rem;
-    }
-    
-    .social-flex {
-        justify-content: center;
-    }
-    
     .footer-links-clean {
         text-align: center;
     }

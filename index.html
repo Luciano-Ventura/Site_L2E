@@ -16,6 +16,9 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body class="dark-mode">
     <!-- background canvas for neural network effect -->
@@ -187,15 +190,15 @@
             <div class="container">
                 <div class="stats-row">
                     <div class="stat-item">
-                        <span class="counter" data-reveal="bottom" data-target="500000">+0</span>
+                        <span class="counter" data-reveal="bottom" data-target="+10M">+0</span>
                         <p>Veículos Analisados</p>
                     </div>
                     <div class="stat-item" style="transition-delay: 0.1s;">
-                        <span class="counter" data-reveal="bottom" data-target="150" style="transition-delay: 0.1s;">+0</span>
+                        <span class="counter" data-reveal="bottom" data-target="+500" style="transition-delay: 0.1s;">+0</span>
                         <p>Projetos Realizados</p>
                     </div>
                     <div class="stat-item" style="transition-delay: 0.2s;">
-                        <span class="counter" data-reveal="bottom" data-target="99.8" style="transition-delay: 0.2s;">0%</span>
+                        <span class="counter" data-reveal="bottom" data-target="+95%" style="transition-delay: 0.2s;">0%</span>
                         <p>Precisão Técnica</p>
                     </div>
                 </div>
@@ -224,20 +227,24 @@
                             </div>
                         </div>
                     </div>
-                    <form class="contact-form">
+                    <form action="https://formspree.io/f/mwvaweev" method="POST" class="contact-form">
                         <div class="form-row">
                             <div class="input-group">
                                 <label for="name">Nome</label>
-                                <input type="text" id="name" required>
+                                <input type="text" id="name" name="name" required>
                             </div>
                             <div class="input-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" id="email" required>
+                                <input type="email" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="input-group">
+                            <label for="whatsapp">WhatsApp</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000">
+                        </div>
+                        <div class="input-group">
                             <label for="message">Mensagem</label>
-                            <textarea id="message" rows="3" placeholder="Como podemos ajudar?"></textarea>
+                            <textarea id="message" name="message" rows="3" placeholder="Como podemos ajudar?"></textarea>
                         </div>
                         <button type="submit" class="btn btn-gradient btn-large">Enviar agora <i data-lucide="send"></i></button>
                     </form>
@@ -270,13 +277,6 @@
                         <li>(48) 99932-4253</li>
                         <li>Florianópolis - SC</li>
                     </ul>
-                </div>
-                <div class="footer-col-social">
-                    <h4>Social</h4>
-                    <div class="social-flex">
-                        <a href="#"><i data-lucide="linkedin"></i></a>
-                        <a href="#"><i data-lucide="instagram"></i></a>
-                    </div>
                 </div>
             </div>
             <div class="footer-bottom">

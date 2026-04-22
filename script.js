@@ -167,9 +167,11 @@ function animateCounter(el) {
     el.dataset.animated = "true";
     
     const targetText = el.dataset.target;
+    // Extract the numeric part for calculation
     const target = parseFloat(targetText.replace(/[^\d.]/g, ''));
     const isPercentage = targetText.includes('%');
     const hasPlus = targetText.includes('+');
+    const hasM = targetText.toUpperCase().includes('M');
     
     let current = 0;
     const duration = 2500;
@@ -186,11 +188,16 @@ function animateCounter(el) {
         });
         
         if (hasPlus) display = '+' + display;
+        if (hasM) display = display + 'M';
         if (isPercentage) display = display + '%';
+        
         el.innerText = display;
         
-        if (progress < 1) requestAnimationFrame(step);
-        else el.innerText = targetText;
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            el.innerText = targetText;
+        }
     }
     requestAnimationFrame(step);
 }
@@ -229,25 +236,65 @@ function initFormInteraction() {
     const form = document.querySelector('.contact-form');
     if (!form) return;
     
-    form.addEventListener('submit', (e) => {
+    // WhatsApp Mask
+    const whatsappInput = form.querySelector('#whatsapp');
+    if (whatsappInput) {
+        whatsappInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, "");
+            if (value.length > 11) value = value.substring(0, 11);
+            
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    value = `(${value}`;
+                } else if (value.length <= 6) {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+                } else if (value.length <= 10) {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2, 6)}-${value.substring(6)}`;
+                } else {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7)}`;
+                }
+            }
+            e.target.value = value;
+        });
+    }
+    
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = form.querySelector('button');
         const originalText = btn.innerHTML;
+        const formData = new FormData(form);
+        
         btn.disabled = true;
         btn.innerHTML = 'Enviando...';
         
-        setTimeout(() => {
-            btn.innerHTML = 'Solicitação Enviada! <i data-lucide="check"></i>';
-            btn.style.background = '#10b981';
-            lucide.createIcons();
-            form.reset();
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
             
+            if (response.ok) {
+                btn.innerHTML = 'Solicitação Enviada! <i data-lucide="check"></i>';
+                btn.style.background = '#10b981';
+                lucide.createIcons();
+                form.reset();
+            } else {
+                throw new Error('Erro no envio');
+            }
+        } catch (error) {
+            btn.innerHTML = 'Erro ao enviar <i data-lucide="alert-circle"></i>';
+            btn.style.background = '#ef4444';
+            lucide.createIcons();
+        } finally {
             setTimeout(() => {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
                 btn.style.background = '';
                 lucide.createIcons();
-            }, 3000);
-        }, 1500);
+            }, 4000);
+        }
     });
 }
