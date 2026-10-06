@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2E Tecnologia Rodoviária | Apresentação</title>
+    <meta name="description" content="Conheça a L2E Tecnologia Rodoviária, especializada em coleta, processamento e estudos de tráfego, com tecnologia e experiência para transformar dados viários em informação.">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="canonical" href="https://l2etec.com.br/apresentacao">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <style>
+        /* Specific styles for presentation page */
+        .presentation-hero {
+            background-image: linear-gradient(to right, rgba(1, 4, 19, 0.95) 0%, rgba(1, 4, 19, 0.7) 100%), url('../assets/project1.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        .timeline {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--glass-border);
+            z-index: 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            z-index: 1;
+            width: 18%;
+            text-align: center;
+        }
+        
+        .timeline-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .timeline-content h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .timeline::before {
+                top: 0;
+                left: 40px;
+                width: 2px;
+                height: 100%;
+            }
+            .timeline-item {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                text-align: left;
+                gap: 1.5rem;
+            }
+            .timeline-icon {
+                margin: 0;
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+            }
+        }
+        
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pillars-grid { grid-template-columns: 1fr; }
+        }
+        
+        .presentation-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .presentation-cards { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .presentation-cards { grid-template-columns: 1fr; }
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--text-gray);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        .map-section {
+            background-image: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
+            text-align: center;
+        }
+        
+        .presentation-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+        
+        .presentation-nav a {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--glass-border);
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .presentation-nav a:hover, .presentation-nav a.active {
+            background: var(--primary);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        
+        @media (max-width: 768px) {
+            .presentation-nav { display: none; }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <canvas id="neural-canvas"></canvas>
+    
+    <div class="menu-overlay"></div>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="../index.html"><img src="../assets/logo_contrast.png" alt="L2E Tecnologia" class="nav-logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#processo">Processo</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#aplicacoes">Aplicações</a></li>
+                <li><a href="#contato" class="btn btn-outline">Contato</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="presentation-nav">
+        <a href="#hero" title="Início"></a>
+        <a href="#sobre" title="Quem Somos"></a>
+        <a href="#solucoes" title="O Que Fazemos"></a>
+        <a href="#diferencial" title="Nosso Diferencial"></a>
+        <a href="#processo" title="Como Funciona"></a>
+        <a href="#tecnologia" title="Tecnologia"></a>
+        <a href="#aplicacoes" title="Aplicações"></a>
+        <a href="#por-que" title="Por que a L2E?"></a>
+        <a href="#alcance" title="Nosso Alcance"></a>
+        <a href="#contato" title="Contato"></a>
+    </div>
+
+    <main>
+        <!-- 1. HERO — CAPA DA APRESENTAÇÃO -->
+        <section class="hero presentation-hero" id="hero">
+            <div class="container hero-content">
+                <div class="hero-text" data-reveal="left">
+                    <h1 style="font-size: 4.5rem;">Inteligência que move o <span class="gradient-text">tráfego.</span></h1>
+                    <p class="subtitle" style="font-size: 1.5rem; font-weight: 500; color: var(--text-white);">Dados precisos. Tecnologia. Informação que transforma projetos viários.</p>
+                    <p class="subtitle" style="margin-top: -2rem;">A L2E Tecnologia Rodoviária atua em todas as etapas do estudo de tráfego, da coleta em campo ao processamento e entrega dos dados, oferecendo soluções técnicas para apoiar decisões de engenharia, mobilidade e planejamento viário.</p>
+                    <div class="hero-btns">
+                        <a href="#solucoes" class="btn btn-primary btn-large">Conheça nossas soluções</a>
+                        <a href="#contato" class="btn btn-secondary btn-large">Fale com a L2E</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i data-lucide="chevron-down" size="32"></i>
+            </div>
+        </section>
+
+        <!-- 2. QUEM SOMOS -->
+        <section class="about-section" id="sobre">
+            <div class="container split-layout">
+                <div class="about-content" data-reveal="left">
+                    <span class="badge">A Empresa</span>
+                    <h2>Quem é a <span class="gradient-text">L2E</span></h2>
+                    <p>A L2E Tecnologia Rodoviária nasceu da experiência de profissionais com mais de uma década de atuação no setor de estudos e dados de tráfego.</p>
+                    <p>Unimos conhecimento de campo, tecnologia e processamento de dados para entregar informações confiáveis e organizadas, capazes de apoiar projetos de engenharia, mobilidade e planejamento viário.</p>
+                    <p>Nossa atuação combina operação em campo, tecnologia de coleta, processamento de dados e análise, permitindo que o cliente tenha uma solução integrada e eficiente.</p>
+                </div>
+                <div class="about-visual" data-reveal="right">
+                    <div class="glass-card premium-shadow" style="padding: 3rem;">
+                        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 2rem;">
+                            <h3 style="font-size: 3rem; color: var(--primary); line-height: 1;">+11 anos</h3>
+                            <p style="text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-gray);">de experiência</p>
+                        </div>
+                        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 2rem;">
+                            <h3 style="font-size: 2rem; color: var(--text-white); line-height: 1;">Atuação</h3>
+                            <p style="text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-gray);">em diferentes regiões do Brasil</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2rem; color: var(--text-white); line-height: 1;">Campo + Tecnologia</h3>
+                            <p style="text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: var(--text-gray);">em uma única solução</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. O QUE FAZEMOS -->
+        <section class="services" id="solucoes">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom" style="text-align: center;">
+                    <span class="badge">O que fazemos</span>
+                    <h2 class="title">Nossas <span class="gradient-text">soluções</span></h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">Da coleta de dados à informação pronta para utilização.</p>
+                    <p style="color: var(--primary); font-weight: 600;">Coletamos. Processamos. Organizamos. Entregamos informação.</p>
+                </div>
+
+                <div class="presentation-cards" style="margin-top: 4rem;">
+                    <!-- Card 1 -->
+                    <div class="glass-card" data-reveal="bottom">
+                        <div class="icon-box"><i data-lucide="calculator"></i></div>
+                        <h3>Contagem Volumétrica</h3>
+                        <p>Coleta e levantamento do volume de veículos em pontos estratégicos, fornecendo dados para estudos e projetos de tráfego.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-card" data-reveal="bottom" style="transition-delay: 0.1s;">
+                        <div class="icon-box"><i data-lucide="car"></i></div>
+                        <h3>Classificação Veicular</h3>
+                        <p>Identificação e classificação dos veículos conforme as categorias necessárias ao estudo, permitindo uma análise mais precisa da composição do tráfego.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="glass-card" data-reveal="bottom" style="transition-delay: 0.2s;">
+                        <div class="icon-box"><i data-lucide="video"></i></div>
+                        <h3>Gravação de Tráfego</h3>
+                        <p>Utilização de câmeras e equipamentos para registro do fluxo veicular, possibilitando coleta contínua e posterior processamento dos dados.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="glass-card" data-reveal="bottom" style="transition-delay: 0.3s;">
+                        <div class="icon-box"><i data-lucide="cpu"></i></div>
+                        <h3>Processamento de Dados</h3>
+                        <p>Transformação dos registros coletados em informações estruturadas, organizadas e prontas para análise.</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="glass-card" data-reveal="bottom" style="transition-delay: 0.4s;">
+                        <div class="icon-box"><i data-lucide="bar-chart-2"></i></div>
+                        <h3>Estudos de Tráfego</h3>
+                        <p>Tratamento e organização das informações necessárias para estudos de circulação, capacidade, mobilidade e planejamento viário.</p>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="glass-card" data-reveal="bottom" style="transition-delay: 0.5s;">
+                        <div class="icon-box"><i data-lucide="file-text"></i></div>
+                        <h3>Relatórios Técnicos</h3>
+                        <p>Entrega dos dados e resultados de forma organizada, clara e adequada às necessidades do projeto e do cliente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. NOSSO DIFERENCIAL -->
+        <section class="tech-section" id="diferencial" style="background: rgba(255,255,255,0.01);">
+            <div class="container split-layout">
+                <div class="tech-visual" data-reveal="left">
+                    <h2 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 2rem;">Transformamos <span class="gradient-text">dados de tráfego</span> em informação para decisões melhores.</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-gray);">A L2E atua de forma integrada em diferentes etapas do processo. Isso permite maior controle sobre a qualidade dos dados, padronização das informações e acompanhamento de todo o fluxo entre campo e resultado final.</p>
+                </div>
+                <div class="tech-content" data-reveal="right">
+                    <span class="badge">Mais do que coletar dados</span>
+                    <div class="pillars-grid">
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h4 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.2rem;">Experiência de campo</h4>
+                            <p style="font-size: 0.9rem;">Mais de 11 anos de experiência em atividades relacionadas à coleta, tratamento e análise de dados de tráfego.</p>
+                        </div>
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h4 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.2rem;">Tecnologia</h4>
+                            <p style="font-size: 0.9rem;">Uso de equipamentos e ferramentas tecnológicas para tornar a coleta e o processamento mais eficientes.</p>
+                        </div>
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h4 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.2rem;">Processamento</h4>
+                            <p style="font-size: 0.9rem;">Os dados coletados são organizados e tratados para gerar informações úteis ao projeto.</p>
+                        </div>
+                        <div class="glass-card" style="padding: 2rem;">
+                            <h4 style="color: var(--text-white); margin-bottom: 0.5rem; font-size: 1.2rem;">Confiabilidade</h4>
+                            <p style="font-size: 0.9rem;">Foco em padronização, controle de qualidade e consistência das informações entregues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. COMO FUNCIONA -->
+        <section class="services" id="processo">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom" style="text-align: center;">
+                    <span class="badge">Como funciona</span>
+                    <h2 class="title">Do campo ao <span class="gradient-text">resultado</span></h2>
+                </div>
+
+                <div class="timeline" data-reveal="bottom">
+                    <div class="timeline-item">
+                        <div class="timeline-icon"><i data-lucide="map"></i></div>
+                        <div class="timeline-content">
+                            <span style="color: var(--text-gray); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Etapa 01</span>
+                            <h4>Planejamento</h4>
+                            <p>Entendimento da necessidade do projeto, locais, horários, metodologia e recursos necessários.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" style="transition-delay: 0.1s;">
+                        <div class="timeline-icon"><i data-lucide="video"></i></div>
+                        <div class="timeline-content">
+                            <span style="color: var(--text-gray); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Etapa 02</span>
+                            <h4>Coleta</h4>
+                            <p>Instalação dos equipamentos e realização da coleta/registro do tráfego em campo.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" style="transition-delay: 0.2s;">
+                        <div class="timeline-icon"><i data-lucide="cpu"></i></div>
+                        <div class="timeline-content">
+                            <span style="color: var(--text-gray); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Etapa 03</span>
+                            <h4>Processamento</h4>
+                            <p>Tratamento e processamento dos dados coletados.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" style="transition-delay: 0.3s;">
+                        <div class="timeline-icon"><i data-lucide="layers"></i></div>
+                        <div class="timeline-content">
+                            <span style="color: var(--text-gray); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Etapa 04</span>
+                            <h4>Análise e organização</h4>
+                            <p>Consolidação das informações de acordo com o objetivo do estudo.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" style="transition-delay: 0.4s;">
+                        <div class="timeline-icon"><i data-lucide="check-circle"></i></div>
+                        <div class="timeline-content">
+                            <span style="color: var(--text-gray); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Etapa 05</span>
+                            <h4>Entrega</h4>
+                            <p>Disponibilização dos dados e relatórios de forma organizada para utilização pelo cliente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TECNOLOGIA -->
+        <section class="tech-section" id="tecnologia" style="background: rgba(255,255,255,0.01);">
+            <div class="container split-layout">
+                <div class="tech-content" data-reveal="left">
+                    <span class="badge">Inovação</span>
+                    <h2>Tecnologia aplicada ao <span class="gradient-text">tráfego</span></h2>
+                    <p>Utilizamos recursos tecnológicos para aumentar a eficiência da coleta, reduzir etapas manuais e possibilitar o processamento de grandes volumes de informações.</p>
+                    <ul class="tech-features" style="margin-top: 2rem; list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Monitoramento por câmeras</li>
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Registro de tráfego</li>
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Processamento digital</li>
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Organização de grandes volumes de dados</li>
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Controle e conferência das informações</li>
+                        <li style="margin-bottom: 0.5rem;"><i data-lucide="check-circle-2" style="color: var(--primary); margin-right: 0.5rem;"></i> Entrega estruturada dos resultados</li>
+                    </ul>
+                </div>
+                <div class="tech-visual" data-reveal="right">
+                    <div class="visual-container">
+                        <img src="../assets/tech_visual.webp" alt="Tecnologia aplicada ao tráfego" class="tech-main-img glass-card premium-shadow">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. ONDE PODEMOS ATUAR -->
+        <section class="services" id="aplicacoes">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom" style="text-align: center;">
+                    <span class="badge">Aplicações</span>
+                    <h2 class="title">Onde podemos <span class="gradient-text">atuar</span></h2>
+                </div>
+
+                <div class="presentation-cards" style="margin-top: 4rem;">
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Rodovias</h3>
+                        <p>Estudos e levantamentos para corredores e trechos rodoviários.</p>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem; transition-delay: 0.1s;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Interseções e Rotatórias</h3>
+                        <p>Levantamento de fluxos e movimentos para análise de circulação.</p>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem; transition-delay: 0.2s;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Mobilidade Urbana</h3>
+                        <p>Dados para apoiar estudos de mobilidade e planejamento urbano.</p>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem; transition-delay: 0.3s;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Concessionárias</h3>
+                        <p>Soluções para levantamentos e monitoramento de tráfego.</p>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem; transition-delay: 0.4s;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Projetos de Engenharia</h3>
+                        <p>Dados necessários para estudos e dimensionamentos.</p>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2.5rem; transition-delay: 0.5s;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Órgãos Públicos</h3>
+                        <p>Informações para planejamento, diagnóstico e tomada de decisão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. POR QUE A L2E? -->
+        <section class="about-section" id="por-que" style="background: rgba(255,255,255,0.01);">
+            <div class="container">
+                <div class="section-header" data-reveal="bottom" style="text-align: center;">
+                    <span class="badge">Vantagens</span>
+                    <h2 class="title">Por que escolher a <span class="gradient-text">L2E?</span></h2>
+                </div>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="glass-card" data-reveal="bottom" style="margin-bottom: 1.5rem; padding: 2rem; display: flex; align-items: center; gap: 2rem;">
+                        <h3 style="font-size: 3rem; color: rgba(14, 165, 233, 0.3); font-weight: 800; min-width: 60px;">01</h3>
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Experiência</h4>
+                            <p>Mais de 11 anos de experiência no segmento.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="margin-bottom: 1.5rem; padding: 2rem; display: flex; align-items: center; gap: 2rem; transition-delay: 0.1s;">
+                        <h3 style="font-size: 3rem; color: rgba(14, 165, 233, 0.3); font-weight: 800; min-width: 60px;">02</h3>
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Solução integrada</h4>
+                            <p>Campo, processamento e entrega em uma mesma estrutura.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="margin-bottom: 1.5rem; padding: 2rem; display: flex; align-items: center; gap: 2rem; transition-delay: 0.2s;">
+                        <h3 style="font-size: 3rem; color: rgba(14, 165, 233, 0.3); font-weight: 800; min-width: 60px;">03</h3>
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Tecnologia</h4>
+                            <p>Equipamentos e ferramentas para otimizar a coleta e o tratamento dos dados.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="margin-bottom: 1.5rem; padding: 2rem; display: flex; align-items: center; gap: 2rem; transition-delay: 0.3s;">
+                        <h3 style="font-size: 3rem; color: rgba(14, 165, 233, 0.3); font-weight: 800; min-width: 60px;">04</h3>
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Flexibilidade</h4>
+                            <p>Soluções adaptadas à necessidade e dimensão de cada projeto.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card" data-reveal="bottom" style="padding: 2rem; display: flex; align-items: center; gap: 2rem; transition-delay: 0.4s;">
+                        <h3 style="font-size: 3rem; color: rgba(14, 165, 233, 0.3); font-weight: 800; min-width: 60px;">05</h3>
+                        <div>
+                            <h4 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Compromisso</h4>
+                            <p>Foco na qualidade, organização e confiabilidade das informações entregues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. NOSSO ALCANCE -->
+        <section class="map-section" id="alcance" style="padding: 8rem 0;">
+            <div class="container">
+                <div data-reveal="bottom">
+                    <i data-lucide="map-pin" style="color: var(--primary); width: 48px; height: 48px; margin-bottom: 1rem;"></i>
+                    <h2 class="title" style="margin-bottom: 1.5rem;"><span class="gradient-text">Atuação nacional</span></h2>
+                    <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; color: var(--text-white);">Com origem em Florianópolis — SC, a L2E está preparada para atender projetos em diferentes regiões do Brasil.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. CTA FINAL -->
+        <section class="results" id="contato" style="padding: 8rem 0;">
+            <div class="container">
+                <div data-reveal="bottom" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.2;">Seu projeto precisa de <span style="color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.5);">dados confiáveis.</span></h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">Conte com a L2E para transformar a coleta e o processamento de dados de tráfego em informação organizada para o seu projeto.</p>
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="../index.html#contato" class="btn" style="background: white; color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">Solicitar orçamento</a>
+                        <a href="https://wa.me/5548999324253?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20da%20L2E." target="_blank" class="btn" style="background: transparent; border: 1px solid white; color: white;">Falar pelo WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 11. RODAPÉ -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col-brand">
+                    <img src="../assets/logo_contrast.png" alt="L2E" class="footer-logo">
+                    <p>Qualidade técnica e precisão em engenharia de tráfego, com expertise de 11 anos de atuação nacional.</p>
+                </div>
+                <div class="footer-col-nav">
+                    <h4>Navegação</h4>
+                    <ul class="footer-links-clean">
+                        <li><a href="../index.html#home">Início</a></li>
+                        <li><a href="../index.html#sobre">Sobre</a></li>
+                        <li><a href="../index.html#servicos">Serviços</a></li>
+                        <li><a href="../index.html#projetos">Projetos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-contact">
+                    <h4>Contato</h4>
+                    <ul class="footer-links-clean">
+                        <li>contato.l2etec@gmail.com</li>
+                        <li>(48) 99932-4253</li>
+                        <li>Florianópolis - SC</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 L2E Tecnologia Rodoviária. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/5548999324253?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento%20para%20estudos%20de%20tráfego." target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <script src="../script.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Active states for presentation nav
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.presentation-nav a');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
