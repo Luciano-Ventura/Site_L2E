@@ -190,6 +190,17 @@
         @media (max-width: 768px) {
             .presentation-nav { display: none; }
         }
+        
+        /* Responsive typography classes */
+        .hero-title-large { font-size: 4.5rem; }
+        .section-title-large { font-size: 3.5rem; line-height: 1.1; margin-bottom: 2rem; }
+        .cta-title-large { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        
+        @media (max-width: 768px) {
+            .hero-title-large { font-size: 2.5rem; word-wrap: break-word; hyphens: auto; }
+            .section-title-large { font-size: 2.2rem; margin-bottom: 1.5rem; word-wrap: break-word; hyphens: auto; }
+            .cta-title-large { font-size: 2rem; }
+        }
     </style>
 </head>
 <body class="dark-mode">
@@ -236,7 +247,7 @@
         <section class="hero presentation-hero" id="hero">
             <div class="container hero-content">
                 <div class="hero-text" data-reveal="left">
-                    <h1 style="font-size: 4.5rem;">Inteligência que move o <span class="gradient-text">tráfego.</span></h1>
+                    <h1 class="hero-title-large">Inteligência que move o <span class="gradient-text">tráfego.</span></h1>
                     <p class="subtitle" style="font-size: 1.5rem; font-weight: 500; color: var(--text-white);">Dados precisos. Tecnologia. Informação que transforma projetos viários.</p>
                     <p class="subtitle" style="margin-top: -2rem;">A L2E Tecnologia Rodoviária atua em todas as etapas do estudo de tráfego, da coleta em campo ao processamento e entrega dos dados, oferecendo soluções técnicas para apoiar decisões de engenharia, mobilidade e planejamento viário.</p>
                     <div class="hero-btns">
@@ -334,7 +345,7 @@
         <section class="tech-section" id="diferencial" style="background: rgba(255,255,255,0.01);">
             <div class="container split-layout">
                 <div class="tech-visual" data-reveal="left">
-                    <h2 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 2rem;">Transformamos <span class="gradient-text">dados de tráfego</span> em informação para decisões melhores.</h2>
+                    <h2 class="section-title-large">Transformamos <span class="gradient-text">dados de tráfego</span> em informação para decisões melhores.</h2>
                     <p style="font-size: 1.1rem; color: var(--text-gray);">A L2E atua de forma integrada em diferentes etapas do processo. Isso permite maior controle sobre a qualidade dos dados, padronização das informações e acompanhamento de todo o fluxo entre campo e resultado final.</p>
                 </div>
                 <div class="tech-content" data-reveal="right">
@@ -538,7 +549,7 @@
         <section class="results" id="contato" style="padding: 8rem 0;">
             <div class="container">
                 <div data-reveal="bottom" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <h2 style="font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.2;">Seu projeto precisa de <span style="color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.5);">dados confiáveis.</span></h2>
+                    <h2 class="cta-title-large">Seu projeto precisa de <span style="color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.5);">dados confiáveis.</span></h2>
                     <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">Conte com a L2E para transformar a coleta e o processamento de dados de tráfego em informação organizada para o seu projeto.</p>
                     <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
                         <a href="../index.html#contato" class="btn" style="background: white; color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">Solicitar orçamento</a>
