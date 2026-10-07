@@ -178,6 +178,7 @@ nav {
     display: flex;
     list-style: none;
     gap: 3rem;
+    align-items: center;
 }
 
 .nav-links a {
@@ -206,6 +207,33 @@ nav {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+.nav-links a.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 1.6rem !important;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    line-height: 1;
+}
+
+.nav-links a.btn-outline {
+    border: 1px solid var(--primary);
+    color: var(--primary) !important;
+    background: transparent;
+}
+
+.nav-links a.btn-outline:hover {
+    background: var(--primary);
+    color: white !important;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.nav-links a.btn::after {
+    display: none;
 }
 
 /* Hero Section */
