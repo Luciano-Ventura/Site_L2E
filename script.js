@@ -3,6 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initInstitutionalData();
     initHeroVideo();
     initNeuralNetwork();
     initScrollReveal();
@@ -14,28 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
+ * Inicialização e ligação de dados institucionais (SSOT)
+ */
+function initInstitutionalData() {
+    if (window.L2E_CONFIG && window.L2E_CONFIG.helpers && typeof window.L2E_CONFIG.helpers.applyToDOM === 'function') {
+        window.L2E_CONFIG.helpers.applyToDOM();
+    }
+}
+
+/**
  * Hero Video Force Play
  */
 function initHeroVideo() {
     const video = document.getElementById('main-highway-video');
     if (!video) return;
 
+    // Respeita modo de economia de dados do navegador/dispositivo
+    if (navigator.connection && navigator.connection.saveData) {
+        console.log("Modo de economia de dados ativo: vídeo mantido pausado.");
+        return;
+    }
+
     const playVideo = () => {
         video.play().then(() => {
-            console.log("Video started playing.");
             document.removeEventListener('click', playVideo);
             document.removeEventListener('touchstart', playVideo);
         }).catch(err => {
-            console.log("Autoplay still blocked or error:", err);
+            console.log("Reprodução do vídeo pausada ou restrita:", err);
         });
     };
 
-    // Try playing immediately
     video.play().catch(() => {
-        console.log("Autoplay blocked. Waiting for user interaction to play.");
-        // Support for strict browser policies: play on first click/touch
-        document.addEventListener('click', playVideo);
-        document.addEventListener('touchstart', playVideo);
+        document.addEventListener('click', playVideo, { once: true });
+        document.addEventListener('touchstart', playVideo, { once: true });
     });
 }
 
@@ -208,27 +220,56 @@ function initMobileMenu() {
     const overlay = document.querySelector('.menu-overlay');
     if (!toggle || !nav) return;
     
-    const toggleMenu = () => {
-        const isActive = nav.classList.toggle('active');
-        if (overlay) overlay.classList.toggle('active');
+    const closeMenu = () => {
+        if (!nav.classList.contains('active')) return;
+        nav.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
         
-        // Lucide transforms <i> into <svg>, so we need to look for both
         const iconElement = toggle.querySelector('i') || toggle.querySelector('svg');
-        if (iconElement) {
-            iconElement.setAttribute('data-lucide', isActive ? 'x' : 'menu');
+        if (iconElement && window.lucide) {
+            iconElement.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        }
+        document.body.style.overflow = '';
+    };
+
+    const toggleMenu = (e) => {
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+        const willBeActive = !nav.classList.contains('active');
+        nav.classList.toggle('active', willBeActive);
+        if (overlay) overlay.classList.toggle('active', willBeActive);
+        
+        const iconElement = toggle.querySelector('i') || toggle.querySelector('svg');
+        if (iconElement && window.lucide) {
+            iconElement.setAttribute('data-lucide', willBeActive ? 'x' : 'menu');
             lucide.createIcons();
         }
         
-        // Prevent scroll when menu is open
-        document.body.style.overflow = isActive ? 'hidden' : '';
+        // Impede scroll APENAS em telas móveis quando o menu estiver aberto
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = willBeActive ? 'hidden' : '';
+        } else {
+            document.body.style.overflow = '';
+        }
     };
 
     toggle.addEventListener('click', toggleMenu);
-    if (overlay) overlay.addEventListener('click', toggleMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
 
-    // Close menu when clicking a link
+    // Fecha o menu ao clicar em um link APENAS se o menu mobile estiver aberto
     nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', toggleMenu);
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    });
+
+    // Fecha o menu ao redimensionar além do breakpoint mobile
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && nav.classList.contains('active')) {
+            closeMenu();
+        }
     });
 }
 
@@ -236,7 +277,7 @@ function initFormInteraction() {
     const form = document.querySelector('.contact-form');
     if (!form) return;
     
-    // WhatsApp Mask
+    // Máscara dinâmica de telefone / WhatsApp
     const whatsappInput = form.querySelector('#whatsapp');
     if (whatsappInput) {
         whatsappInput.addEventListener('input', (e) => {
@@ -258,14 +299,34 @@ function initFormInteraction() {
         });
     }
     
+    // Feedback persistente acessível
+    let feedbackEl = form.querySelector('.form-feedback');
+    if (!feedbackEl) {
+        feedbackEl = document.createElement('div');
+        feedbackEl.className = 'form-feedback';
+        feedbackEl.setAttribute('aria-live', 'polite');
+        form.appendChild(feedbackEl);
+    }
+    
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = form.querySelector('button');
+        const btn = form.querySelector('button[type="submit"]');
         const originalText = btn.innerHTML;
         const formData = new FormData(form);
         
+        // Proteção contra spambots (Honeypot)
+        if (formData.get('_gotcha')) {
+            form.reset();
+            feedbackEl.className = 'form-feedback success';
+            feedbackEl.innerHTML = '<i data-lucide="check-circle-2"></i> <span>Solicitação enviada com sucesso!</span>';
+            if (window.lucide) lucide.createIcons();
+            return;
+        }
+
         btn.disabled = true;
         btn.innerHTML = 'Enviando...';
+        feedbackEl.className = 'form-feedback';
+        feedbackEl.style.display = 'none';
         
         try {
             const response = await fetch(form.action, {
@@ -277,24 +338,23 @@ function initFormInteraction() {
             });
             
             if (response.ok) {
-                btn.innerHTML = 'Solicitação Enviada! <i data-lucide="check"></i>';
-                btn.style.background = '#10b981';
-                lucide.createIcons();
+                feedbackEl.className = 'form-feedback success';
+                feedbackEl.innerHTML = '<i data-lucide="check-circle-2"></i> <span>Solicitação enviada com sucesso! Nossa equipe técnica retornará o seu contato em breve.</span>';
+                feedbackEl.style.display = 'flex';
                 form.reset();
+                if (window.lucide) lucide.createIcons();
             } else {
-                throw new Error('Erro no envio');
+                throw new Error('Falha no recebimento pelo servidor');
             }
         } catch (error) {
-            btn.innerHTML = 'Erro ao enviar <i data-lucide="alert-circle"></i>';
-            btn.style.background = '#ef4444';
-            lucide.createIcons();
+            feedbackEl.className = 'form-feedback error';
+            feedbackEl.innerHTML = '<i data-lucide="alert-triangle"></i> <span>Não foi possível enviar no momento. Por favor, tente novamente ou fale conosco diretamente pelo WhatsApp (48) 99932-4253.</span>';
+            feedbackEl.style.display = 'flex';
+            if (window.lucide) lucide.createIcons();
         } finally {
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                btn.style.background = '';
-                lucide.createIcons();
-            }, 4000);
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+            if (window.lucide) lucide.createIcons();
         }
     });
 }
